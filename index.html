@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Ball</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        #box {
+            width: 500px;
+            height: 200px;
+            border: 2px solid black;
+            position: relative;
+            margin: 20px auto;
+            background-color: #f9f9f9;
+            overflow: hidden;
+        }
+        
+        #ball {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 85px; 
+            left: 0px; 
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Moving Ball </h1>
+    
+    <button id="startBtn">Start</button>
+    <button id="resetBtn">Reset</button>
+
+    <div id="box">
+        <div id="ball"></div>
+    </div>
+
+    <script>
+        
+        const ball = document.getElementById('ball');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        let position = 0;
+        let intervalId = null;
+
+        
+        function moveBall() {
+            
+            if (intervalId !== null) return; 
+
+            intervalId = setInterval(() => {
+                
+                position += 2; 
+                ball.style.left = position + 'px';
+
+                
+                if (position >= 470) { 
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+            }, 10);
+        }
+
+        
+        function resetBall() {
+            clearInterval(intervalId); 
+            intervalId = null;
+            position = 0;              
+            ball.style.left = '0px';  
+        }
+
+        
+        startBtn.addEventListener('click', moveBall);
+        resetBtn.addEventListener('click', resetBall);
+    </script>
+
+</body>
+</html>
 
